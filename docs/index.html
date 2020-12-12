@@ -1,0 +1,296 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue2-ts-template</title>
+	<meta name="description" content="Documentation for vue2-ts-template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">vue2-ts-template</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>vue2-ts-template</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#项目基础代码架构说明" id="项目基础代码架构说明" style="color: inherit; text-decoration: none;">
+					<h1>项目基础代码架构说明</h1>
+				</a>
+				<a href="#包管理工具" id="包管理工具" style="color: inherit; text-decoration: none;">
+					<h4>包管理工具</h4>
+				</a>
+				<ul>
+					<li>npm</li>
+				</ul>
+				<a href="#主要用到的库" id="主要用到的库" style="color: inherit; text-decoration: none;">
+					<h4>主要用到的库</h4>
+				</a>
+				<ul>
+					<li>vue 全家桶 vue2 + vue-router + vuex + typescript</li>
+					<li>http 请求:axios</li>
+					<li>ui 库:ant-design-vue.</li>
+					<li>提交规范:git cz commitizen</li>
+					<li>版本更改历史: changelog</li>
+					<li>文档工具:typedoc</li>
+					<li>代码检查:eslint+eslint-typescript,格式化:prettier.提交之前检查与修复：lint-staged&quot;</li>
+					<li>webpack 插件:style-resources-loader</li>
+				</ul>
+				<a href="#代码基础架构说明" id="代码基础架构说明" style="color: inherit; text-decoration: none;">
+					<h4>代码基础架构说明</h4>
+				</a>
+				<pre><code>|<span class="hljs-string">-- 根目录
+    </span>|<span class="hljs-string">-- @types 项目共用的 type
+    </span>|<span class="hljs-string">-- dist 项目 build 之后的文件夹
+    </span>|<span class="hljs-string">-- docs 文档生成的根目录位置
+    </span>|<span class="hljs-string">-- public 项目静态资源，不经过 webpack，以及默认的模版，适合存放第三方压缩好的资源
+    </span>|<span class="hljs-string">-- src 主要的开发目录
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- App.vue 页面渲染根节点
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- main.ts 入口文件
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- shims-vue.d.ts vue 文件类型的 type
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- api http 请求相关
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- apiList.ts api 接口列表
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- axios.ts 业务请求封装
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- editor.ts 其他业务封装
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- user.ts api 请求模块
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- assets 存放静态资源，这个文件夹下的文件会走 webpack 压缩流程
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- components
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- index.ts 自动注册脚本
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- global 自动注册的全局组件
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- ...其他非全局注册的模块
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- config 全局静态配置，不可更改项
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- layout 页面页面骨架
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- plugins 存放第三方插件
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- index.ts 插件挂载入口
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- router 路由
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- index.ts 路由入口
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- store vuex
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- modules 多个模块
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- index.ts 自动装载模块
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- app app 模块
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- styles 全局样式，一句 ui 库主题样式
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- \_variables.less
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- test.less
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- utils 常用函数以及其他有用工具
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- common.ts
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- views 页面级组件
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- Home.vue 正常页面
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- test 组件测试页面
+    </span>|<span class="hljs-string"> </span>|<span class="hljs-string">-- Test.vue
+    </span>|<span class="hljs-string">-- tests 测试用例
+    </span>|<span class="hljs-string">-- api api 模块
+    </span>|<span class="hljs-string">-- unit 单元测试
+    </span>|<span class="hljs-string">-- .czrc 提交规范选项设置
+    </span>|<span class="hljs-string">-- .editorconfig vscode 编辑器 设置
+    </span>|<span class="hljs-string">-- .env.development 开发环境配置
+    </span>|<span class="hljs-string">-- .env.preview 测试环境配置
+    </span>|<span class="hljs-string">-- .env.production 生产环境配置
+    </span>|<span class="hljs-string">-- .eslintignore eslint 要忽略的文件夹
+    </span>|<span class="hljs-string">-- .eslintrc.js eslint 规则配置
+    </span>|<span class="hljs-string">-- .gitattributes github 语言选项设置
+    </span>|<span class="hljs-string">-- .gitignore git 忽略的文件
+    </span>|<span class="hljs-string">-- .gitlab-ci.yml gitlab CI/CD 配置
+    </span>|<span class="hljs-string">-- .prettierrc.js 格式化插件配置
+    </span>|<span class="hljs-string">-- CHANGELOG.md 版本更改说明
+    </span>|<span class="hljs-string">-- Dockerfile 如果需要容器部署
+    </span>|<span class="hljs-string">-- README.md 项目说明
+    </span>|<span class="hljs-string">-- babel.config.js babel 设置
+    </span>|<span class="hljs-string">-- global.d.ts 全局的 type
+    </span>|<span class="hljs-string">-- package.json npm 配置
+    </span>|<span class="hljs-string">-- tsconfig.json typescript 配置
+    </span>|<span class="hljs-string">-- typedoc.json 文档配置文件
+    </span>|<span class="hljs-string">-- vue.config.js vue-cli 脚手架配置文件</span></code></pre>
+				<a href="#组件编写" id="组件编写" style="color: inherit; text-decoration: none;">
+					<h4>组件编写</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 单个组件由5部分组成<ol>
+							<li>component.vue(html)</li>
+							<li>component.ts(data,props,methods)</li>
+							<li>component.d.ts(model)</li>
+							<li>component.less(style)</li>
+						</ol>
+					</li>
+				</ul>
+				<a href="#样式配置" id="样式配置" style="color: inherit; text-decoration: none;">
+					<h4>样式配置</h4>
+				</a>
+				<blockquote>
+					<p>均通过在 vue-cli 中配置 webpack 实现.</p>
+				</blockquote>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 自动注入全局样式</li>
+					<li><input checked="" disabled="" type="checkbox"> 配置全局 less 变量</li>
+					<li><input checked="" disabled="" type="checkbox"> 支持自定义 UI 库的主题颜色</li>
+				</ul>
+				<a href="#网络请求" id="网络请求" style="color: inherit; text-decoration: none;">
+					<h4>网络请求</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 基于 axios 封装脱离具体业务逻辑的网络请求,支持编写脱离浏览器环境的测试用例.(跟业务无关)</li>
+				</ul>
+				<a href="#数据状态管理" id="数据状态管理" style="color: inherit; text-decoration: none;">
+					<h4>数据状态管理</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 建立应用数据状态管理</li>
+					<li><input checked="" disabled="" type="checkbox"> 支持多个模块,以及自动装载模块</li>
+					<li><input checked="" disabled="" type="checkbox"> 支持持久化</li>
+				</ul>
+				<a href="#ui-库" id="ui-库" style="color: inherit; text-decoration: none;">
+					<h4>UI 库</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 添加 ant-design-vue,支持组件按需加载</li>
+					<li><input checked="" disabled="" type="checkbox"> 将 UI 库部分功能如 message 添加到每个组件实例</li>
+				</ul>
+				<a href="#插件与常用工具函数" id="插件与常用工具函数" style="color: inherit; text-decoration: none;">
+					<h4>插件与常用工具函数</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 引用常用工具函数</li>
+				</ul>
+				<a href="#配置" id="配置" style="color: inherit; text-decoration: none;">
+					<h4>配置</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 配置 webpack,分离开发/测试/生产环境配置.</li>
+					<li><input checked="" disabled="" type="checkbox"> 添加 webpack 常用插件,优化打包配置.</li>
+					<li><input checked="" disabled="" type="checkbox"> 根据环境配置 vue-cli 环境变量(环境相关)</li>
+					<li><input checked="" disabled="" type="checkbox"> 配置应用全局静态常量(业务相关)</li>
+					<li><input checked="" disabled="" type="checkbox"> 完成 tsconfig 相关配置</li>
+					<li><input checked="" disabled="" type="checkbox"> 增加编辑器配置</li>
+				</ul>
+				<a href="#开发工具" id="开发工具" style="color: inherit; text-decoration: none;">
+					<h4>开发工具</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> eslint 代码检查,配置 prettier 格式化工具,使检查规则和格式化规则一致</li>
+					<li><input checked="" disabled="" type="checkbox"> 新增提交规范 git cz commitizen,统一代码提交规范</li>
+					<li><input checked="" disabled="" type="checkbox"> 为没有 type 的库和变量添加 shims</li>
+				</ul>
+				<a href="#cicd" id="cicd" style="color: inherit; text-decoration: none;">
+					<h4>CI/CD</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 配置自动构建/持续集成配置文件(与部署相关,需结合到具体项目部署情况)</li>
+				</ul>
+				<a href="#文档" id="文档" style="color: inherit; text-decoration: none;">
+					<h4>文档</h4>
+				</a>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> 使用 TYPEDOC 搭建项目文档应用</li>
+					<li><input checked="" disabled="" type="checkbox"> 在提交规范的基础上,增加版本更改历史,自动生成 changelog</li>
+					<li><input checked="" disabled="" type="checkbox"> 配置 http-server 启动文档应用</li>
+				</ul>
+				<a href="#测试用例" id="测试用例" style="color: inherit; text-decoration: none;">
+					<h4>测试用例</h4>
+				</a>
+				<a href="#安装依赖" id="安装依赖" style="color: inherit; text-decoration: none;">
+					<h2>安装依赖</h2>
+				</a>
+				<pre><code>yarn <span class="hljs-keyword">install</span>
+npm <span class="hljs-keyword">install</span></code></pre>
+				<a href="#开发模式" id="开发模式" style="color: inherit; text-decoration: none;">
+					<h3>开发模式</h3>
+				</a>
+				<pre><code>yarn serve
+npm <span class="hljs-keyword">run</span><span class="bash"> serve</span></code></pre>
+				<a href="#生产环境" id="生产环境" style="color: inherit; text-decoration: none;">
+					<h3>生产环境</h3>
+				</a>
+				<pre><code>yarn build
+npm <span class="hljs-keyword">run</span><span class="bash"> build</span></code></pre>
+				<a href="#测试用例-1" id="测试用例-1" style="color: inherit; text-decoration: none;">
+					<h3>测试用例</h3>
+				</a>
+				<a href="#更多问题" id="更多问题" style="color: inherit; text-decoration: none;">
+					<h3>更多问题</h3>
+				</a>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#router" class="tsd-kind-icon">router</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#routes" class="tsd-kind-icon">routes</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
