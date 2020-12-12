@@ -1,28 +1,20 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
+import { createGuard } from "@/router/guards";
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+/** 自动加载其他路由模块 */
+const files = require.context("../views", true, /(\.router\.ts)$/);
+let modules: Array<RouteConfig> = [];
+files.keys().forEach(key => {
+  modules = modules.concat(files(key).default);
+});
+
+const routes: Array<RouteConfig> = [...modules];
 
 const router = new VueRouter({
   routes
 });
-
+createGuard(router);
 export default router;

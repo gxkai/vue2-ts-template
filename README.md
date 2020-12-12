@@ -19,62 +19,51 @@
 
 ```
 |-- 根目录
-    |-- @types 项目共用的 type
     |-- dist 项目 build 之后的文件夹
     |-- docs 文档生成的根目录位置
     |-- public 项目静态资源，不经过 webpack，以及默认的模版，适合存放第三方压缩好的资源
     |-- src 主要的开发目录
     | |-- App.vue 页面渲染根节点
     | |-- main.ts 入口文件
-    | |-- shims-vue.d.ts vue 文件类型的 type
+    | |-- types 全局类型定义
     | |-- api http 请求相关
-    | | |-- apiList.ts api 接口列表
-    | | |-- axios.ts 业务请求封装
-    | | |-- editor.ts 其他业务封装
-    | | |-- user.ts api 请求模块
+    | | |-- axios.ts 请求拦截层
+    | | |-- adapters 服务适配层
+    | | |-- services 服务层
     | |-- assets 存放静态资源，这个文件夹下的文件会走 webpack 压缩流程
     | |-- components
     | | |-- index.ts 自动注册脚本
     | | |-- global 自动注册的全局组件
     | | |-- ...其他非全局注册的模块
-    | |-- config 全局静态配置，不可更改项
-    | |-- layout 页面页面骨架
+    | |-- classes 其他封装类目录，如第Layout2D封装
+    | |-- layout 页面骨架
     | |-- plugins 存放第三方插件
     | | |-- index.ts 插件挂载入口
     | |-- router 路由
     | | |-- index.ts 路由入口
     | |-- store vuex
-    | | |-- modules 多个模块
-    | | |-- index.ts 自动装载模块
-    | | |-- app app 模块
-    | |-- styles 全局样式，一句 ui 库主题样式
-    | | |-- \_variables.less
-    | | |-- test.less
+    | | |-- index.ts vuex入口
+    | |-- styles 全局样式
+    | | |-- fonts 字体
+    | | |-- plugins 第三方UI库样式
+    | | |-- variables 可复用less常量和mixins 
+    | | |-- index.less 入口 
+    | | |-- reset.less 重置样式 
     | |-- utils 常用函数以及其他有用工具
-    | | |-- common.ts
     | |-- views 页面级组件
-    | |-- Home.vue 正常页面
-    | |-- test 组件测试页面
-    | |-- Test.vue
-    |-- tests 测试用例
-    |-- api api 模块
-    |-- unit 单元测试
     |-- .czrc 提交规范选项设置
-    |-- .editorconfig vscode 编辑器 设置
+    |-- .editorconfig  编辑器 设置
     |-- .env.development 开发环境配置
     |-- .env.preview 测试环境配置
     |-- .env.production 生产环境配置
     |-- .eslintignore eslint 要忽略的文件夹
     |-- .eslintrc.js eslint 规则配置
-    |-- .gitattributes github 语言选项设置
     |-- .gitignore git 忽略的文件
-    |-- .gitlab-ci.yml gitlab CI/CD 配置
     |-- .prettierrc.js 格式化插件配置
     |-- CHANGELOG.md 版本更改说明
     |-- Dockerfile 如果需要容器部署
     |-- README.md 项目说明
     |-- babel.config.js babel 设置
-    |-- global.d.ts 全局的 type
     |-- package.json npm 配置
     |-- tsconfig.json typescript 配置
     |-- typedoc.json 文档配置文件
@@ -84,10 +73,19 @@
 #### 组件编写
 
 - [x] 单个组件由5部分组成
-    1. component.vue(html)
-    2. component.ts(data,props,methods)
-    3. component.d.ts(model)
-    4. component.less(style)
+    1. Component.vue(html)
+    2. Component.ts(data,props,methods)
+    3. Component.d.ts(model)
+    4. Component.less(style)
+    
+#### 页面编写
+- [x] 单个页面由7部分组成
+    1. Page.vue(html)
+    2. Page.ts(data,props,methods)
+    3. Page.d.ts(model)
+    4. Page.less(style)
+    5. Page.router.ts(router)
+    6. Page.vuex.ts(vuex)
 
 #### 样式配置
 
@@ -144,20 +142,33 @@
 ## 安装依赖
 
 ```
-yarn install
 npm install
 ```
 
 ### 开发模式
 
 ```
-yarn serve
 npm run serve
 ```
 
 ### 生产环境
 
 ```
-yarn build
 npm run build
+```
+
+### 文档服务
+```
+npm run docs
+```
+
+### 提交代码
+```
+npm run commit
+```
+
+### 版本变更
+
+```
+npm run changelog
 ```
