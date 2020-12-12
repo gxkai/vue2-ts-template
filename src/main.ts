@@ -5,7 +5,7 @@ import router from "./router";
 import store from "./store";
 import "@/styles/index.less";
 import { loadAllPlugins } from "@/plugins";
-import {registerGlobalComponent} from "@/components";
+import { registerGlobalComponent } from "@/components";
 
 Vue.config.productionTip = false;
 loadAllPlugins(Vue);
