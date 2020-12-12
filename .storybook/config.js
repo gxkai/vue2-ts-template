@@ -1,6 +1,4 @@
 import {addDecorator, configure} from '@storybook/vue'
-import './global.scss'
-import '../src/share'
 import {addParameters} from "@storybook/vue";
 import { themes, create } from '@storybook/theming';
 // https://github.com/pocka/storybook-addon-vue-info
@@ -49,11 +47,10 @@ addParameters({
     },
     defaultViewport: '',
   },
-  assets: ['https://via.placeholder.com/300/09f/fff.png'],
   options: {
     showPanel: true,
-        panelPosition: 'right',
-        theme: themes.light,
+    panelPosition: 'right',
+    theme: themes.light,
   }
 });
 function loadStories () {
