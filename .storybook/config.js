@@ -54,7 +54,7 @@ addParameters({
   }
 });
 function loadStories () {
-  const req = require.context('../src/components', true, /\.stories\.(t|j)s$/)
+  const req = require.context('../src', true, /\.story\.(t|j)s$/)
   req.keys().forEach((filename)=>req(filename))
 }
 

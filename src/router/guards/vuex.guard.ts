@@ -1,5 +1,5 @@
 import { VueRouter } from "vue-router/types/router";
-import store from "@/store";
+import { store } from "@/store";
 import HomeVuex, { HomeVuexModule } from "@/views/home/home.vuex";
 import { mergeWith } from "lodash";
 

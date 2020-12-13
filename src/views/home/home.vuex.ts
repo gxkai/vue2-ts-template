@@ -5,7 +5,7 @@ import {
   Mutation,
   VuexModule
 } from "vuex-module-decorators";
-import store from "@/store";
+import { store } from "@/store";
 
 export interface IHome {}
 @Module({

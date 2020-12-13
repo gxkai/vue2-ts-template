@@ -1,89 +1,71 @@
-import Axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from "axios";
+import axios, {
+  AxiosRequestConfig,
+  Method,
+  AxiosError,
+  AxiosResponse,
+  AxiosPromise
+} from "axios";
+import { PendingType, ResponseData } from "@/api/models/axios.model";
 
-/**
- * get status code
- * @param {AxiosResponse} response Axios  response object
- */
-const getErrorCode2text = (response: AxiosResponse): string => {
-  /** http status code */
-  const code = response.status;
-  /** notice text */
-  let message = "Request Error";
-  switch (code) {
-    case 400:
-      message = "Request Error";
-      break;
-    case 401:
-      message = "Unauthorized, please login";
-      break;
-    case 403:
-      message = "拒绝访问";
-      break;
-    case 404:
-      message = "访问资源不存在";
-      break;
-    case 408:
-      message = "请求超时";
-      break;
-    case 500:
-      message = "位置错误";
-      break;
-    case 501:
-      message = "承载服务未实现";
-      break;
-    case 502:
-      message = "网关错误";
-      break;
-    case 503:
-      message = "服务暂不可用";
-      break;
-    case 504:
-      message = "网关超时";
-      break;
-    case 505:
-      message = "暂不支持的 HTTP 版本";
-      break;
-    default:
-      message = "位置错误";
+// 取消重复请求
+const pending: Array<PendingType> = [];
+const CancelToken = axios.CancelToken;
+// axios 实例
+const HttpService = axios.create({
+  timeout: 60 * 1000,
+  responseType: "json"
+});
+
+// 移除重复请求
+const removePending = (config: AxiosRequestConfig) => {
+  for (const key in pending) {
+    const item: number = +key;
+    const list: PendingType = pending[key];
+    // 当前请求在数组中存在时执行函数体
+    if (
+      list.url === config.url &&
+      list.method === config.method &&
+      JSON.stringify(list.params) === JSON.stringify(config.params) &&
+      JSON.stringify(list.data) === JSON.stringify(config.data)
+    ) {
+      // 执行取消操作
+      list.cancel("Operation is too frequent, please try again later.");
+      // 从数组中移除记录
+      pending.splice(item, 1);
+    }
   }
-  return message;
 };
 
-/**
- * @returns  {AxiosResponse} result
- * @tutorial see more:https://github.com/onlyling/some-demo/tree/master/typescript-width-axios
- * @example
- * HttpService.get<{data: string; code: number}>('/test').then(({data}) => { console.log(data.code) })
- */
-const HttpService = Axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
-  timeout: 1000 * 60,
-  headers: {}
-});
-
-/**
- * @description 请求发起前的拦截器
- * @returns {AxiosRequestConfig} config
- */
-HttpService.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  return config;
-});
-
-/**
- * @description 响应收到后的拦截器
- * @returns {}
- */
-HttpService.interceptors.response.use(
-  /** 请求有响应 */
-  async (response: AxiosResponse) => {
-    if (response.status === 200) {
-      return Promise.resolve(response);
-    } else {
-      const __text = getErrorCode2text(response);
-      return Promise.reject(new Error(__text));
-    }
+// 添加请求拦截器
+HttpService.interceptors.request.use(
+  (request: AxiosRequestConfig) => {
+    removePending(request);
+    request.cancelToken = new CancelToken(c => {
+      pending.push({
+        url: request.url,
+        method: request.method,
+        params: request.params,
+        data: request.data,
+        cancel: c
+      });
+    });
+    return request;
   },
-  /** 请求无响应 */
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+// 添加响应拦截器
+HttpService.interceptors.response.use(
+  (response: AxiosResponse) => {
+    removePending(response.config);
+    const responseData = response.data as ResponseData;
+    if (responseData.code === 200) {
+      return responseData.data;
+    }
+    return Promise.reject(responseData.msg);
+  },
   (error: AxiosError) => {
     let __error_msg: string = error.message || "";
 
@@ -104,4 +86,4 @@ HttpService.interceptors.response.use(
   }
 );
 
-export default HttpService;
+export { HttpService };

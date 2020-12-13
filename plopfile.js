@@ -54,167 +54,6 @@ module.exports = function(plop) {
           }
           return "file name is required";
         }
-      }
-    ],
-    actions: [
-      function(data) {
-        console.log(data);
-        return "yay";
-      },
-      {
-        type: "add",
-        path: "src/components/{{dashCase fileName}}/{{camelCase fileName}}.scss",
-        templateFile: "templates/component/index.scss"
-      },
-      {
-        type: "add",
-        path:
-          "src/components/{{dashCase fileName}}/{{properCase fileName}}.stories.ts",
-        templateFile: "templates/component/index.stories.ts"
-      },
-      {
-        type: "add",
-        path: "src/components/{{dashCase fileName}}/{{properCase fileName}}.vue",
-        templateFile: "templates/component/index.vue"
-      }
-    ]
-  });
-
-  // setGenerator creates a generator that can be run with "plop generatorName"
-  plop.setGenerator("test", {
-    description: "this is a test",
-    prompts: [
-      {
-        type: "input",
-        name: "name",
-        message: "What is your name?",
-        validate: function(value) {
-          if (/.+/.test(value)) {
-            return true;
-          }
-          return "name is required";
-        }
-      },
-      {
-        type: "input",
-        name: "age",
-        message: "How old are you?",
-        validate: function(value) {
-          const digitsOnly = /\d+/;
-          if (digitsOnly.test(value)) {
-            return true;
-          }
-          return "Invalid age! Must be a number genius!";
-        }
-      },
-      {
-        type: "checkbox",
-        name: "toppings",
-        message: "What pizza toppings do you like?",
-        choices: [
-          { name: "Cheese", value: "cheese", checked: true },
-          { name: "Pepperoni", value: "pepperoni" },
-          { name: "Pineapple", value: "pineapple" },
-          { name: "Mushroom", value: "mushroom" },
-          { name: "Bacon", value: "bacon", checked: true }
-        ]
-      }
-    ],
-    actions: [
-      `this is a comment`,
-      "this is another comment",
-      delayLog("delayed thing"),
-      delayLog("another delayed thing"),
-      delayLog("this was also delayed"),
-      {
-        type: "add",
-        path: "folder/{{dashCase name}}.txt",
-        templateFile: "templates/temp.txt",
-        abortOnFail: true
-      },
-      function customAction(answers) {
-        // move the current working directory to the plop file path
-        // this allows this action to work even when the generator is
-        // executed from inside a subdirectory
-        process.chdir(plop.getPlopfilePath());
-
-        // custom function can be synchronous or async (by returning a promise)
-        const fs = require("fs");
-        let existsMsg = "psst {{name}}, change-me.txt already exists";
-        let copiedMsg = "hey {{name}}, I copied change-me.txt for you";
-        const changeFileName = "change-me.txt";
-        const changeFilePath =
-          plop.getDestBasePath() + "/folder/" + changeFileName;
-
-        // you can use plop.renderString to render templates
-        existsMsg = plop.renderString(existsMsg, answers);
-        copiedMsg = plop.renderString(copiedMsg, answers);
-
-        if (fs.existsSync(changeFilePath)) {
-          // returned value shows up in the console
-          return existsMsg;
-        } else {
-          // do a synchronous copy via node fs
-          fs.writeFileSync(
-            changeFilePath,
-            fs.readFileSync("templates/" + changeFileName)
-          );
-          return copiedMsg;
-        }
-      },
-      {
-        type: "modify",
-        path: "folder/change-me.txt",
-        pattern: /(-- APPEND ITEMS HERE --)/gi,
-        template: "$1\r\n{{name}}: {{age}}"
-      },
-      {
-        type: "modify",
-        path: "folder/change-me.txt",
-        pattern: /(-- PREPEND ITEMS HERE --)/gi,
-        templateFile: "templates/part.txt"
-      },
-      {
-        type: "modify",
-        path: "folder/change-me.txt",
-        pattern: /## replace name here ##/gi,
-        template: "replaced => {{dashCase name}}"
-      },
-      {
-        type: "modify",
-        path: "folder/change-me.txt",
-        skip(data) {
-          if (!data.toppings.includes("mushroom")) {
-            // Skip this action
-            return "Skipped replacing mushrooms";
-          } else {
-            // Continue with this action
-            return;
-          }
-        },
-        transform(fileContents, data) {
-          return fileContents.replace(/mushrooms/g, "pepperoni");
-        }
-      }
-    ]
-  });
-
-  // adding a custom inquirer prompt type
-  plop.addPrompt("directory", require("inquirer-directory"));
-
-  plop.setGenerator("custom-prompt", {
-    description: "custom inquirer prompt example",
-    prompts: [
-      {
-        type: "input",
-        name: "fileName",
-        message: "Pick a file name:",
-        validate: function(value) {
-          if (/.+/.test(value)) {
-            return true;
-          }
-          return "file name is required";
-        }
       },
       {
         type: "directory",
@@ -230,61 +69,88 @@ module.exports = function(plop) {
       },
       {
         type: "add",
-        path: "{{absPath path}}/{{fileName}}.txt",
-        template: "{{absPath path}}/{{fileName}} plopped!"
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.less",
+        templateFile: "templates/component/index.less"
+      },
+      {
+        type: "add",
+        path:
+          "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.story.ts",
+        templateFile: "templates/component/index.story.ts"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.vue",
+        templateFile: "templates/component/index.vue"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.script.ts",
+        templateFile: "templates/component/index.script.ts"
       }
     ]
   });
 
-  // test with dynamic actions, regarding responses to prompts
-  plop.setGenerator("dynamic actions", {
-    description: "another test using an actions function",
+  plop.setGenerator("view", {
+    description: "页面",
     prompts: [
       {
         type: "input",
-        name: "name",
-        message: "What is your name?",
+        name: "fileName",
+        message: "Pick a file name:",
         validate: function(value) {
           if (/.+/.test(value)) {
             return true;
           }
-          return "name is required";
+          return "file name is required";
         }
       },
       {
-        type: "confirm",
-        name: "hasPotatoes",
-        message: "Do you want potatoes with your burger?"
+        type: "directory",
+        name: "path",
+        message: "where would you like to put this view?",
+        basePath: plop.getPlopfilePath()
       }
     ],
-    actions: function(data) {
-      let actions = [
-        {
-          type: "add",
-          path: "folder/{{dashCase name}}-burger.txt",
-          templateFile: "templates/burger.txt",
-          abortOnFail: true
-        }
-      ];
-
-      if (data.hasPotatoes) {
-        actions = actions.concat([
-          {
-            type: "add",
-            path: "folder/{{dashCase name}}-potatoes.txt",
-            templateFile: "templates/potatoes.txt",
-            abortOnFail: true
-          },
-          {
-            type: "modify",
-            path: "folder/{{dashCase name}}-burger.txt",
-            pattern: /(!\n)/gi,
-            template: "$1Your potatoes: {{dashCase name}}-potatoes.txt"
-          }
-        ]);
+    actions: [
+      function(data) {
+        console.log(data);
+        return "yay";
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.less",
+        templateFile: "templates/view/index.less"
+      },
+      {
+        type: "add",
+        path:
+          "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.story.ts",
+        templateFile: "templates/view/index.story.ts"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.vue",
+        templateFile: "templates/view/index.vue"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.script.ts",
+        templateFile: "templates/view/index.script.ts"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.router.ts",
+        templateFile: "templates/view/index.router.ts"
+      },
+      {
+        type: "add",
+        path: "{{absPath path}}/{{camelCase fileName}}/{{camelCase fileName}}.vuex.ts",
+        templateFile: "templates/view/index.vuex.ts"
       }
-
-      return actions;
-    }
+    ]
   });
+
+  // adding a custom inquirer prompt type
+  plop.addPrompt("directory", require("inquirer-directory"));
 };

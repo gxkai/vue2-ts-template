@@ -1,10 +1,10 @@
 import { PageModel } from "@/api/models/page.model";
 import { ProductModel } from "@/api/models/product.model";
+import { generateRandomId } from "@/utils/global.util";
 import {
   FindProductListByPaParams,
   ProductRepository
 } from "@/api/repositories/product.repository";
-import { generateRandomId } from "@/utils/global.util";
 
 export class ProductService {
   static async findProductListByPa(

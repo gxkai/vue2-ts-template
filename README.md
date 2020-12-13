@@ -30,7 +30,7 @@
     | |-- api http 请求相关
     | | |-- axios.ts 请求拦截层
     | | |-- repositories 数据层
-    | | |-- services 服务层
+    | | |-- services 服务层 进行一些数据适配
     | |-- assets 存放静态资源，这个文件夹下的文件会走 webpack 压缩流程
     | |-- components
     | | |-- index.ts 自动注册脚本
@@ -51,6 +51,12 @@
     | | |-- index.less 入口 
     | | |-- reset.less 重置样式 
     | |-- utils 常用函数以及其他有用工具
+    | |-- directives 钩子函数
+    | | |-- automatic 可直接在html中使用的钩子
+    | | |-- manual 需要手动引入的钩子类
+    | |-- filters 过滤器
+    | |-- locales 国际化
+    | |-- constants 常量
     | |-- views 页面级组件
     |-- .czrc 提交规范选项设置
     |-- .editorconfig  编辑器 设置
@@ -69,6 +75,7 @@
     |-- tsconfig.json typescript 配置
     |-- typedoc.json 文档配置文件
     |-- vue.config.js vue-cli 脚手架配置文件
+    |-- templates 模版文件
 ```
 
 #### 组件编写
@@ -87,6 +94,9 @@
     4. Page.less(style)
     5. Page.router.ts(router)
     6. Page.vuex.ts(vuex)
+
+#### 样式编写
+- [x] css module + role属性选择器    
 
 #### 样式配置
 

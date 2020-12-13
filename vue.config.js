@@ -85,7 +85,10 @@ module.exports = {
     /** 全局加载less 的 webpack 插件  */
     "style-resources-loader": {
       preProcessor: "less",
-      patterns: [path.resolve(__dirname, "./src/styles/variables/index.less")]
+      patterns: [
+        path.resolve(__dirname, "./src/styles/variables/index.less"),
+        path.resolve(__dirname, "./src/styles/mixins/index.less")
+      ]
     }
   },
   /**

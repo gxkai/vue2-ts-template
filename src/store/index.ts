@@ -17,4 +17,4 @@ const FloorSession = new VuexPersistence({
 const Store = new Vuex.Store({
   plugins: [VuexSession.plugin, FloorSession.plugin]
 });
-export default Store;
+export { Store, Store as store };

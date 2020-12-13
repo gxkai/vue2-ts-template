@@ -1,15 +1,15 @@
 <template>
-  <div :class="$style.home"></div>
+  <div :class="$style.home" role="home"></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { HomeCore } from "@/views/home/home.core";
+import { HomeScript } from "@/views/home/home.script";
 
 @Component({
   components: {}
 })
-export default class Home extends HomeCore {}
+export default class Home extends HomeScript {}
 </script>
 <style lang="less" module>
 @import "Home";

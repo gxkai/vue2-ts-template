@@ -1,3 +1,6 @@
+/**
+ * @description 图形操作基础数据项
+ */
 export interface BaseModel {
   width?: number;
   height?: number;
