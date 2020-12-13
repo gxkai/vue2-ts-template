@@ -3,5 +3,5 @@
 
 /product/findProductListByPa
 
-product.service.ts 文件名
+product.repository.ts 文件名
 findProductListByPa 方法名

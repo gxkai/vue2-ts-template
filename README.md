@@ -29,7 +29,7 @@
     | |-- types 全局类型定义
     | |-- api http 请求相关
     | | |-- axios.ts 请求拦截层
-    | | |-- adapters 服务适配层
+    | | |-- repositories 数据层
     | | |-- services 服务层
     | |-- assets 存放静态资源，这个文件夹下的文件会走 webpack 压缩流程
     | |-- components
