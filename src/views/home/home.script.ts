@@ -6,4 +6,4 @@ class HomeProps extends Vue {}
 class HomeData extends Vue {}
 
 @Component
-export class HomeCore extends Mixins(HomeData, HomeProps) {}
+export class HomeMethod extends Mixins(HomeData, HomeProps) {}
